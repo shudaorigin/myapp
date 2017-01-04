@@ -1,0 +1,22 @@
+{
+  "name": "myapp",
+  "description": "myapp",
+  "main": "app",
+  "authors": [
+    "shubs"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "myapp"
+  ],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "directory" : "public/components"
+}

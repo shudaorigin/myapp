@@ -1,0 +1,25 @@
+{
+  "name": "myapp",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "body-parser": "~1.15.2",
+    "cookie-parser": "^1.4.3",
+    "debug": "~2.2.0",
+    "expect.js": "latest",
+    "express": "~4.14.0",
+    "jade": "~1.11.0",
+    "mochawesome": "^2.0.0",
+    "morgan": "~1.7.0",
+    "serve-favicon": "~2.3.0",
+    "should": "^11.1.2",
+    "upertest": "latest"
+  },
+  "devDependencies": {
+    "ejs": "^2.5.5",
+    "webpack": "^1.14.0"
+  }
+}

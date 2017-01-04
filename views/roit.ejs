@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <title>myapp</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link href="/components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" /> 
+  <link href="/components/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" type="text/css" /> 
+  <script type="text/javascript" src="/components/riot/riot.min.js"></script>
+ 
+   <style>
+
+	body {
+	  font-family: 'myriad pro', sans-serif;
+	  font-size: 20px;
+	  border: 0;
+	}
+
+  </style>
+ </head>
+ <body>
+
+
+<todo>
+
+  <!-- layout -->
+  <h3>{ opts.title }</h3>
+
+  <ul>
+    <li each={ item, i in items }>{ item }</li>
+  </ul>
+
+  <form onsubmit={ add }>
+    <input ref="input">
+    <button>Add #{ items.length + 1 }</button>
+  </form>
+
+  <!-- style -->
+  <style>
+    h3 {
+      font-size: 14px;
+    }
+  </style>
+
+  <!-- logic -->
+  <script>
+    this.items = []
+
+    add(e) {
+      e.preventDefault()
+      var input = this.refs.input
+      this.items.push(input.value)
+      input.value = ''
+    }
+  </script>
+
+</todo>
+
+
+ 
+<script language="javascript">
+/*
+ riot.mount('todo', {
+      title: 'I want to behave!',
+      items: [
+        { title: 'Avoid excessive coffeine', done: true },
+        { title: 'Hidden item', hidden: true },
+        { title: 'Be less provocative' },
+        { title: 'Be nice to people' }
+      ]
+    })
+*/
+</script>
+
+
+
+ </body>
+ </html>

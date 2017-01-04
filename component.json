@@ -1,0 +1,37 @@
+{
+  "name": "myapp",
+  "authors": [
+    "shubs"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "myapp"
+  ],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "latest",
+    "requirejs": "latest",
+    "seajs": "latest",
+    "zeptojs": "latest",
+    "zepto-full": "latest",
+    "zeptotouch": "latest",
+    "mustache": "latest",
+    "semantic-ui ": "latest",
+    "ember-data": "latest",
+    "ember": "latest",
+    "backbone": "latest",
+    "riot": "latest",
+    "vue": "latest",
+    "mocha": "^3.2.0",
+    "should": "^11.1.2"
+  }
+}
