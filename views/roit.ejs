@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
   <link href="/components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" /> 
   <link href="/components/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" type="text/css" /> 
-  <script type="text/javascript" src="/components/riot/riot.min.js"></script>
+
  
    <style>
 
@@ -19,43 +19,64 @@
   </style>
  </head>
  <body>
+ <todo></todo>
 
 
+<script type="riot/tag">
 <todo>
 
-  <!-- layout -->
   <h3>{ opts.title }</h3>
 
   <ul>
-    <li each={ item, i in items }>{ item }</li>
+    <li each={ items }>
+      <label class={ completed: done }>
+        <input type="checkbox" checked={ done } onclick={ parent.toggle }> { title }
+      </label>
+    </li>
   </ul>
 
   <form onsubmit={ add }>
-    <input ref="input">
-    <button>Add #{ items.length + 1 }</button>
+    <input ref="input" onkeyup={ edit }>
+    <button disabled={ !text }>Add #{ items.length + 1 }</button>
   </form>
 
-  <!-- style -->
-  <style>
-    h3 {
-      font-size: 14px;
-    }
-  </style>
 
-  <!-- logic -->
-  <script>
-    this.items = []
+    this.items = opts.items
+
+    edit(e) {
+      this.text = e.target.value
+    }
 
     add(e) {
       e.preventDefault()
-      var input = this.refs.input
-      this.items.push(input.value)
-      input.value = ''
+      if (this.text) {
+        this.items.push({ title: this.text })
+        this.text = this.refs.input.value = ''
+      }
     }
-  </script>
+
+    toggle(e) {
+      var item = e.item
+      item.done = !item.done
+    }
 
 </todo>
+</script>
 
+<!-- <inner-tag/> is specified on external file -->
+
+<script type="text/javascript" src="/components/riot/riot.min.js"></script>
+<!-- include riot.js and the compiler -->
+<script  src="/components/riot/riot+compiler.min.js"></script>
+
+
+<!-- mount normally -->
+<script>
+riot.mount('todo',{items:[{ title: 1111},
+{ title: 2222},
+{ title: 3333}
+],title:'riotDemo'})
+</script>
 
  
 <script language="javascript">
