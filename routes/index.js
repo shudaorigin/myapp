@@ -17,4 +17,9 @@ router.get('/roit', function(req, res, next) {
    res.render('roit', { title: 'roit' });
 });
 
+router.get('/vue', function(req, res, next) {
+   //global.logger.info("This is an index page!");   
+   res.render('vue', { title: 'vue' });
+});
+
 module.exports = router;

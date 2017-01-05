@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+ <head>
+  <title>myapp</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link href="/components/bootstrap/dist/css/bootstrap.css" rel="stylesheet" type="text/css" /> 
+  <link href="/components/bootstrap/dist/css/bootstrap-theme.css" rel="stylesheet" type="text/css" /> 
+
+ 
+   <style>
+
+body {
+  font-family: 'myriad pro', sans-serif;
+  font-size: 20px;
+  border: 0;
+}
+
+todo {
+  display: block;
+  max-width: 400px;
+  margin: 5% auto;
+}
+
+form input {
+  font-size: 85%;
+  padding: .4em;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+}
+
+button {
+  background-color: #1FADC5;
+  border: 1px solid rgba(0,0,0,.2);
+  font-size: 75%;
+  color: #fff;
+  padding: .4em 1.2em;
+  border-radius: 2em;
+  cursor: pointer;
+  margin: 0 .23em;
+  outline: none;
+}
+
+button[disabled] {
+  background-color: #ddd;
+  color: #aaa;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+  padding: .2em 0;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #ccc;
+}
+
+label {
+  cursor: pointer;
+}
+
+  </style>
+ </head>
+ <body>
+<div id="app-5">
+  <p>{{ message }}</p>
+  <button v-on:click="reverseMessage">Reverse Message</button>
+    <ul id="example-1">
+	  <li v-for="item in items ">
+		{{ item.customerId }}
+	  </li>
+	</ul>
+</div>
+ 
+
+<!-- <inner-tag/> is specified on external file -->
+<script type="text/javascript" src="/components/vue/dist/vue.min.js"></script>
+<script type="text/javascript" src="/components/vue-resource/dist/vue-resource.min.js"></script>
+
+<script language="javascript">
+	var app5 = new Vue({
+	  el: '#app-5',
+	  data: {
+		message: 'Hello Vue.js!',
+        items:[ ]		
+	  },
+	  created: function () {
+		    var vm = this			
+			//vm.items = 'Thinking...';		  
+		    this.$http.jsonp('http://211.149.193.19:8080/api/customers',{ dataType:"jsonp"}).then((response) => {
+				// success callback
+				vm.items=(response.data);
+				console.info("loadAjax");
+			  }, (response) => {
+				return [];
+			});   
+	  },
+	  watch: {
+		// 如果 question 发生改变，这个函数就会运行
+		 items:function(){
+		   // console.info(999);
+		 }
+	  },
+	  mounted : function() {
+		console.info("mounted ");
+	  },
+	  methods: {
+	    ajaxData:function () {
+			
+		},
+		reverseMessage: function () {
+			for(var k=0 ;k<1000;k++){
+			  this.items.push({"customerId": k});
+			}			
+		  //this.message = this.message.split('').reverse().join('')		  
+		}
+	  }
+	})
+</script>
+
+ </body>
+ </html>

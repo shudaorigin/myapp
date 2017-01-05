@@ -10,23 +10,74 @@
  
    <style>
 
-	body {
-	  font-family: 'myriad pro', sans-serif;
-	  font-size: 20px;
-	  border: 0;
-	}
+body {
+  font-family: 'myriad pro', sans-serif;
+  font-size: 20px;
+  border: 0;
+}
+
+todo {
+  display: block;
+  max-width: 400px;
+  margin: 5% auto;
+}
+
+form input {
+  font-size: 85%;
+  padding: .4em;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+}
+
+button {
+  background-color: #1FADC5;
+  border: 1px solid rgba(0,0,0,.2);
+  font-size: 75%;
+  color: #fff;
+  padding: .4em 1.2em;
+  border-radius: 2em;
+  cursor: pointer;
+  margin: 0 .23em;
+  outline: none;
+}
+
+button[disabled] {
+  background-color: #ddd;
+  color: #aaa;
+}
+
+ul {
+  padding: 0;
+}
+
+li {
+  list-style-type: none;
+  padding: .2em 0;
+}
+
+.completed {
+  text-decoration: line-through;
+  color: #ccc;
+}
+
+label {
+  cursor: pointer;
+}
 
   </style>
  </head>
  <body>
- <todo></todo>
+ 
+ <todo>
+    <p id="my-content-{ id }">My beautiful post is just awesome</p>
+ </todo>
 
 
 <script type="riot/tag">
 <todo>
-
-  <h3>{ opts.title }</h3>
-
+  <yield/>
+  <h3>{ opts.title }#{ items.length  }</h3>
+  <label>{text}</label>
   <ul>
     <li each={ items }>
       <label class={ completed: done }>
@@ -34,23 +85,19 @@
       </label>
     </li>
   </ul>
-
   <form onsubmit={ add }>
-    <input ref="input" onkeyup={ edit }>
+    <input ref="input" onkeyup={ edit }>	
     <button disabled={ !text }>Add #{ items.length + 1 }</button>
   </form>
 
-
     this.items = opts.items
-
     edit(e) {
       this.text = e.target.value
     }
-
     add(e) {
       e.preventDefault()
       if (this.text) {
-        this.items.push({ title: this.text })
+        this.items.push({ title: this.text,done:false })
         this.text = this.refs.input.value = ''
       }
     }
@@ -59,7 +106,6 @@
       var item = e.item
       item.done = !item.done
     }
-
 </todo>
 </script>
 
@@ -72,10 +118,14 @@
 
 <!-- mount normally -->
 <script>
-riot.mount('todo',{items:[{ title: 1111},
-{ title: 2222},
-{ title: 3333}
+
+
+riot.mount('todo',{items:[{ title: 1111,done:false},
+{ title: 2222,done:false},
+{ title: 3333,done:false}
 ],title:'riotDemo'})
+
+
 </script>
 
  
