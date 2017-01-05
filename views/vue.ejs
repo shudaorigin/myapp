@@ -9,26 +9,22 @@
 
  
    <style>
-
 body {
   font-family: 'myriad pro', sans-serif;
   font-size: 20px;
   border: 0;
 }
-
 todo {
   display: block;
   max-width: 400px;
   margin: 5% auto;
 }
-
 form input {
   font-size: 85%;
   padding: .4em;
   border: 1px solid #ccc;
   border-radius: 2px;
 }
-
 button {
   background-color: #1FADC5;
   border: 1px solid rgba(0,0,0,.2);
@@ -40,35 +36,29 @@ button {
   margin: 0 .23em;
   outline: none;
 }
-
 button[disabled] {
   background-color: #ddd;
   color: #aaa;
 }
-
 ul {
   padding: 0;
 }
-
 li {
   list-style-type: none;
   padding: .2em 0;
 }
-
 .completed {
   text-decoration: line-through;
   color: #ccc;
 }
-
 label {
   cursor: pointer;
 }
-
   </style>
  </head>
  <body>
 <div id="app-5">
-   <my-tag v-bind:btn="message"></my-tag>
+   <my-tag v-model="message" v-bind:btn="message"></my-tag>
   <p>{{ message }}</p>
  <input v-model="message">
   <button v-on:click="reverseMessage">Reverse Message</button>
@@ -97,15 +87,20 @@ label {
 	
 	var Child = {
 	  //template: '<div>A custom component!</div>'
-	    template: '<span>111111{{ btn }}</span>',
+	    template: '<span>111111{{ btn }}<input ref="input" v-bind:value="btn" v-on:input="updateValue($event.target.value)"></span>',
 		props:['btn'],
 		data:function () {
 		  return {
 		          childMessage: 'child oK'
 		         };
-		}
+		},
+		methods: {
+    		// 不是直接更新值，而是使用此方法来对输入值进行格式化和位数限制
+	    updateValue: function (value) {
+	         this.$emit('input', value);
+	       }
+	   }
 	}
-
 	var app5 = new Vue({
 	  el: '#app-5',
 	  data: {
@@ -141,9 +136,9 @@ label {
 			
 		},
 		reverseMessage: function () {
-			for(var k=0 ;k<1000;k++){
+			//for(var k=0 ;k<1000;k++){
 			  this.items.push({"customerId": k});
-			}			
+			//}			
 		  //this.message = this.message.split('').reverse().join('')		  
 		}
 	  }
@@ -151,4 +146,4 @@ label {
 </script>
 
  </body>
- </html>
+</html>
