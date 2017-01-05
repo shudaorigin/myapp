@@ -68,7 +68,9 @@ label {
  </head>
  <body>
 <div id="app-5">
+   <my-tag v-bind:btn="message"></my-tag>
   <p>{{ message }}</p>
+ <input v-model="message">
   <button v-on:click="reverseMessage">Reverse Message</button>
     <ul id="example-1">
 	  <li v-for="item in items ">
@@ -83,11 +85,36 @@ label {
 <script type="text/javascript" src="/components/vue-resource/dist/vue-resource.min.js"></script>
 
 <script language="javascript">
+		
+	Vue.component('commonp-tag', {
+	    template: '<span>{{ childMessage }}</span>',
+		data:function () {
+		  return {
+		          childMessage: 'child oK'
+		         };
+		}
+	})
+	
+	var Child = {
+	  //template: '<div>A custom component!</div>'
+	    template: '<span>111111{{ btn }}</span>',
+		props:['btn'],
+		data:function () {
+		  return {
+		          childMessage: 'child oK'
+		         };
+		}
+	}
+
 	var app5 = new Vue({
 	  el: '#app-5',
 	  data: {
 		message: 'Hello Vue.js!',
         items:[ ]		
+	  },
+      components: {
+		// <my-component> 将只在父模板可用		
+		'my-tag': Child
 	  },
 	  created: function () {
 		    var vm = this			
