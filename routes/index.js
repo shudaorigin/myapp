@@ -22,4 +22,9 @@ router.get('/vue', function(req, res, next) {
    res.render('vue', { title: 'vue' });
 });
 
+router.get('/vuewp', function(req, res, next) {
+   //global.logger.info("This is an index page!");   
+   res.render('vuewp', { title: 'vue' });
+});
+
 module.exports = router;

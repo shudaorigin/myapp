@@ -7,19 +7,25 @@
   },
   "dependencies": {
     "body-parser": "~1.15.2",
+    "browserify": "^13.3.0",
     "cookie-parser": "^1.4.3",
     "debug": "~2.2.0",
     "expect.js": "latest",
     "express": "~4.14.0",
+    "gulp": "^3.9.1",
     "jade": "~1.11.0",
     "mochawesome": "^2.0.0",
     "morgan": "~1.7.0",
     "serve-favicon": "~2.3.0",
     "should": "^11.1.2",
-    "upertest": "latest"
+    "upertest": "latest",
+    "vue": "^2.1.8",
+    "vue-template-compiler": "^2.1.8",
+    "webpack": "^1.14.0"
   },
   "devDependencies": {
     "ejs": "^2.5.5",
+    "vue-loader": "^10.0.2",
     "webpack": "^1.14.0"
   }
 }

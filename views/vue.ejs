@@ -64,12 +64,25 @@ label {
   cursor: pointer;
 }
 
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s
+}
+.fade-enter, .fade-leave-active {
+  opacity: 0
+}
+
   </style>
  </head>
  <body>
+
+
+
+ 
 <div id="app-5">
-   <my-tag v-bind:btn="message"></my-tag>
-  <p>{{ message }}</p>
+ <my-tag v-bind:btn='message' v-model='message'></my-tag>
+ <transition name="fade">
+ <p>{{ message }}</p>
+ </transition>
  <input v-model="message">
   <button v-on:click="reverseMessage">Reverse Message</button>
     <ul id="example-1">
@@ -78,14 +91,28 @@ label {
 	  </li>
 	</ul>
 </div>
- 
 
 <!-- <inner-tag/> is specified on external file -->
+
 <script type="text/javascript" src="/components/vue/dist/vue.min.js"></script>
+<!-- <script type="text/javascript" src="/components/vue/dist/vue.runtime.min.js"></script> -->
 <script type="text/javascript" src="/components/vue-resource/dist/vue-resource.min.js"></script>
+
+ <script type="text/x-template" id="mytemplate">
+    <span>111111{{ btn }}
+	<input  ref='input' v-bind:style='{ color: \"red\" }'  v-model:btn='btn'  v-focus v-on:input='increment($event.target.value)'/></span>
+</script>
 
 <script language="javascript">
 		
+	Vue.directive('focus', {
+	  // 当绑定元素插入到 DOM 中。
+	  inserted: function (el) {
+		// 聚焦元素
+		el.focus();
+	  }
+	});
+	
 	Vue.component('commonp-tag', {
 	    template: '<span>{{ childMessage }}</span>',
 		data:function () {
@@ -95,15 +122,42 @@ label {
 		}
 	})
 	
+	Vue.component('async-component', function (resolve, reject) {
+      vue.$http.get('async-component.html', function(data, status, request){
+        var parser = new DOMParser();
+        var doc = parser.parseFromString(data, "text/html");
+        resolve({
+            template: doc
+        });
+      });
+	});
+
 	var Child = {
-	  //template: '<div>A custom component!</div>'
-	    template: '<span>111111{{ btn }}</span>',
-		props:['btn'],
+	    template: "<span>111111{{ btn }}<input  ref='input' v-bind:style='{ color: \"red\" }'  v-model:btn='btn'  v-focus v-on:input='increment($event.target.value)'/></span>",
+		//template:'#mytemplate',
+		props:{'btn':{
+					  type: String,
+					  default: 100
+					}},
 		data:function () {
 		  return {
 		          childMessage: 'child oK'
 		         };
-		}
+		},
+		methods: { 
+			increment: function (val) {
+			   console.info(val);
+			   this.$emit('input', val)
+			},		
+            findParent: function (value) { 
+/*			
+                console.log(this.$parent);  //访问根组件  
+                console.log(this.$parent.val);  //访问根组件的val属性  
+                console.log(this.$parent.$children.indexOf(this));  //查看当前能否在其父组件的子组件中找到索引  
+                console.log(this.$parent === this.$root);   //查看父组件和根组件是不是全等的（因为他的父组件就是根组件） 
+*/				
+            }  
+        }  
 	}
 
 	var app5 = new Vue({
@@ -133,6 +187,11 @@ label {
 		   // console.info(999);
 		 }
 	  },
+	  compiled: function(){
+        setTimeout(function(){
+		  this.loaded = true;
+		}.bind(this), 1000);
+      },
 	  mounted : function() {
 		console.info("mounted ");
 	  },
