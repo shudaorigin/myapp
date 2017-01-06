@@ -9,26 +9,22 @@
 
  
    <style>
-
 body {
   font-family: 'myriad pro', sans-serif;
   font-size: 20px;
   border: 0;
 }
-
 todo {
   display: block;
   max-width: 400px;
   margin: 5% auto;
 }
-
 form input {
   font-size: 85%;
   padding: .4em;
   border: 1px solid #ccc;
   border-radius: 2px;
 }
-
 button {
   background-color: #1FADC5;
   border: 1px solid rgba(0,0,0,.2);
@@ -40,29 +36,25 @@ button {
   margin: 0 .23em;
   outline: none;
 }
-
 button[disabled] {
   background-color: #ddd;
   color: #aaa;
 }
-
 ul {
   padding: 0;
 }
-
 li {
   list-style-type: none;
   padding: .2em 0;
 }
-
 .completed {
   text-decoration: line-through;
   color: #ccc;
 }
-
 label {
   cursor: pointer;
 }
+<<<<<<< HEAD
 
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s
@@ -71,6 +63,8 @@ label {
   opacity: 0
 }
 
+=======
+>>>>>>> 8260c0ca95b185156d92076e1bff138a83694fbe
   </style>
  </head>
  <body>
@@ -79,10 +73,12 @@ label {
 
  
 <div id="app-5">
+
  <my-tag v-bind:btn='message' v-model='message'></my-tag>
  <transition name="fade">
  <p>{{ message }}</p>
  </transition>
+
  <input v-model="message">
   <button v-on:click="reverseMessage">Reverse Message</button>
     <ul id="example-1">
@@ -139,11 +135,13 @@ label {
 					  type: String,
 					  default: 100
 					}},
+
 		data:function () {
 		  return {
 		          childMessage: 'child oK'
 		         };
 		},
+
 		methods: { 
 			increment: function (val) {
 			   console.info(val);
@@ -159,7 +157,6 @@ label {
             }  
         }  
 	}
-
 	var app5 = new Vue({
 	  el: '#app-5',
 	  data: {
@@ -200,9 +197,9 @@ label {
 			
 		},
 		reverseMessage: function () {
-			for(var k=0 ;k<1000;k++){
+			//for(var k=0 ;k<1000;k++){
 			  this.items.push({"customerId": k});
-			}			
+			//}			
 		  //this.message = this.message.split('').reverse().join('')		  
 		}
 	  }
@@ -210,4 +207,4 @@ label {
 </script>
 
  </body>
- </html>
+</html>
