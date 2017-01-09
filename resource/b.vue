@@ -9,7 +9,7 @@
 
 <template>
   <div class="container">
-    <h2 class="red">ccccccccccccbbbb{{msg}}</h2>
+    <h2 class="red">{{$store.state.newNode}}ccccccccccccbbbb{{msg}}</h2>
 	
   </div>
 </template>

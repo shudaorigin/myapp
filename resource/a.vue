@@ -9,7 +9,11 @@
 
 <template>
   <div class="container">
-    <h2 class="red">{{storeData}}</h2>
+    <h2 class="red">{{$store.state.newNode}}</h2>
+	<h2 class="red">{{storeData}}</h2>
+	
+	 <input v-model="$store.state.newNode">
+	
 	<h1>Hello App!</h1>
 	  <p>
 		<!-- 使用 router-link 组件来导航. -->
@@ -26,7 +30,7 @@
 
 <script>
 import { updateActiveNote } from './actions.js'
-import store from './store.js'
+import { state } from 'vuex'
 
 export default {
   data () {
@@ -34,21 +38,10 @@ export default {
       msg: 'Hello from Component A!',
 	  //newNode : 'newNode ---------'
     }
-  },
-  vuex: {
-    getters: {
-      notes: state => state.notes,
-      activeNote: state => state.activeNote,
-	  newNode: state=>state.newNode
-    },
-    actions: {
-      updateActiveNote
-    }
-  },
+  },  
   computed: {
     storeData() {	
-   
-	   return store.state.newNode ;
+   	   return this.$store.state.newNode ;
 	}
   }
 }

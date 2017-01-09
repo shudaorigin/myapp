@@ -55,19 +55,19 @@
 
 	var _a2 = _interopRequireDefault(_a);
 
-	var _b = __webpack_require__(12);
+	var _b = __webpack_require__(11);
 
 	var _b2 = _interopRequireDefault(_b);
 
-	var _c = __webpack_require__(17);
+	var _c = __webpack_require__(16);
 
 	var _c2 = _interopRequireDefault(_c);
 
-	var _vueRouter = __webpack_require__(22);
+	var _vueRouter = __webpack_require__(21);
 
 	var _vueRouter2 = _interopRequireDefault(_vueRouter);
 
-	var _store = __webpack_require__(9);
+	var _store = __webpack_require__(22);
 
 	var _store2 = _interopRequireDefault(_store);
 
@@ -6244,7 +6244,7 @@
 	__vue_exports__ = __webpack_require__(7)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(11)
+	var __vue_template__ = __webpack_require__(10)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -6608,11 +6608,7 @@
 
 	var _actions = __webpack_require__(8);
 
-	var _store = __webpack_require__(9);
-
-	var _store2 = _interopRequireDefault(_store);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	var _vuex = __webpack_require__(9);
 
 	exports.default = {
 	  data: function data() {
@@ -6621,26 +6617,9 @@
 	    };
 	  },
 
-	  vuex: {
-	    getters: {
-	      notes: function notes(state) {
-	        return state.notes;
-	      },
-	      activeNote: function activeNote(state) {
-	        return state.activeNote;
-	      },
-	      newNode: function newNode(state) {
-	        return state.newNode;
-	      }
-	    },
-	    actions: {
-	      updateActiveNote: _actions.updateActiveNote
-	    }
-	  },
 	  computed: {
 	    storeData: function storeData() {
-
-	      return _store2.default.state.newNode;
+	      return this.$store.state.newNode;
 	    }
 	  }
 	};
@@ -6686,65 +6665,6 @@
 
 /***/ },
 /* 9 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _vue = __webpack_require__(1);
-
-	var _vue2 = _interopRequireDefault(_vue);
-
-	var _vuex = __webpack_require__(10);
-
-	var _vuex2 = _interopRequireDefault(_vuex);
-
-	function _interopRequireDefault(obj) {
-	  return obj && obj.__esModule ? obj : { default: obj };
-	}
-
-	_vue2.default.use(_vuex2.default);
-
-	var state = {
-	  notes: [],
-	  newNode: 'new store info',
-	  activeNote: {}
-	};
-
-	var mutations = {
-	  ADD_NOTE: function ADD_NOTE(state) {
-	    var newNote = {
-	      text: 'New note',
-	      favorite: false
-	    };
-	    state.notes.push(newNote);
-	    state.activeNote = newNote;
-	  },
-	  EDIT_NOTE: function EDIT_NOTE(state, text) {
-	    state.activeNote.text = text;
-	  },
-	  DELETE_NOTE: function DELETE_NOTE(state) {
-	    state.notes.$remove(state.activeNote);
-	    state.activeNote = state.notes[0];
-	  },
-	  TOGGLE_FAVORITE: function TOGGLE_FAVORITE(state) {
-	    state.activeNote.favorite = !state.activeNote.favorite;
-	  },
-	  SET_ACTIVE_NOTE: function SET_ACTIVE_NOTE(state, note) {
-	    state.activeNote = note;
-	  }
-	};
-
-	exports.default = new _vuex2.default.Store({
-	  state: state,
-	  mutations: mutations
-	});
-
-/***/ },
-/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -7510,7 +7430,7 @@
 	})));
 
 /***/ },
-/* 11 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -7518,7 +7438,25 @@
 	    staticClass: "container"
 	  }, [_c('h2', {
 	    staticClass: "red"
-	  }, [_vm._v(_vm._s(_vm.storeData))]), _vm._v(" "), _c('h1', [_vm._v("Hello App!")]), _vm._v(" "), _c('p', [_c('router-link', {
+	  }, [_vm._v(_vm._s(_vm.$store.state.newNode))]), _vm._v(" "), _c('h2', {
+	    staticClass: "red"
+	  }, [_vm._v(_vm._s(_vm.storeData))]), _vm._v(" "), _c('input', {
+	    directives: [{
+	      name: "model",
+	      rawName: "v-model",
+	      value: (_vm.$store.state.newNode),
+	      expression: "$store.state.newNode"
+	    }],
+	    domProps: {
+	      "value": _vm._s(_vm.$store.state.newNode)
+	    },
+	    on: {
+	      "input": function($event) {
+	        if ($event.target.composing) { return; }
+	        _vm.$store.state.newNode = $event.target.value
+	      }
+	    }
+	  }), _vm._v(" "), _c('h1', [_vm._v("Hello App!")]), _vm._v(" "), _c('p', [_c('router-link', {
 	    attrs: {
 	      "to": "/foo"
 	    }
@@ -7537,20 +7475,20 @@
 	}
 
 /***/ },
-/* 12 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 
 	/* styles */
-	__webpack_require__(13)
+	__webpack_require__(12)
 
 	/* script */
-	__vue_exports__ = __webpack_require__(15)
+	__vue_exports__ = __webpack_require__(14)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(16)
+	var __vue_template__ = __webpack_require__(15)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -7585,13 +7523,13 @@
 
 
 /***/ },
-/* 13 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(14);
+	var content = __webpack_require__(13);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(6)(content, {});
@@ -7611,7 +7549,7 @@
 	}
 
 /***/ },
-/* 14 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(5)();
@@ -7625,7 +7563,7 @@
 
 
 /***/ },
-/* 15 */
+/* 14 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -7642,7 +7580,7 @@
 	};
 
 /***/ },
-/* 16 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -7650,7 +7588,7 @@
 	    staticClass: "container"
 	  }, [_c('h2', {
 	    staticClass: "red"
-	  }, [_vm._v("ccccccccccccbbbb" + _vm._s(_vm.msg))])])
+	  }, [_vm._v(_vm._s(_vm.$store.state.newNode) + "ccccccccccccbbbb" + _vm._s(_vm.msg))])])
 	},staticRenderFns: []}
 	module.exports.render._withStripped = true
 	if (false) {
@@ -7661,20 +7599,20 @@
 	}
 
 /***/ },
-/* 17 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 
 	/* styles */
-	__webpack_require__(18)
+	__webpack_require__(17)
 
 	/* script */
-	__vue_exports__ = __webpack_require__(20)
+	__vue_exports__ = __webpack_require__(19)
 
 	/* template */
-	var __vue_template__ = __webpack_require__(21)
+	var __vue_template__ = __webpack_require__(20)
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -7709,13 +7647,13 @@
 
 
 /***/ },
-/* 18 */
+/* 17 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// style-loader: Adds some css to the DOM by adding a <style> tag
 
 	// load the styles
-	var content = __webpack_require__(19);
+	var content = __webpack_require__(18);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
 	var update = __webpack_require__(6)(content, {});
@@ -7735,7 +7673,7 @@
 	}
 
 /***/ },
-/* 19 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	exports = module.exports = __webpack_require__(5)();
@@ -7749,7 +7687,7 @@
 
 
 /***/ },
-/* 20 */
+/* 19 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -7766,7 +7704,7 @@
 	};
 
 /***/ },
-/* 21 */
+/* 20 */
 /***/ function(module, exports, __webpack_require__) {
 
 	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
@@ -7785,7 +7723,7 @@
 	}
 
 /***/ },
-/* 22 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -9849,6 +9787,65 @@
 	}
 
 	module.exports = VueRouter;
+
+/***/ },
+/* 22 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _vue = __webpack_require__(1);
+
+	var _vue2 = _interopRequireDefault(_vue);
+
+	var _vuex = __webpack_require__(9);
+
+	var _vuex2 = _interopRequireDefault(_vuex);
+
+	function _interopRequireDefault(obj) {
+	  return obj && obj.__esModule ? obj : { default: obj };
+	}
+
+	_vue2.default.use(_vuex2.default);
+
+	var state = {
+	  notes: [],
+	  newNode: 'new store info',
+	  activeNote: {}
+	};
+
+	var mutations = {
+	  ADD_NOTE: function ADD_NOTE(state) {
+	    var newNote = {
+	      text: 'New note',
+	      favorite: false
+	    };
+	    state.notes.push(newNote);
+	    state.activeNote = newNote;
+	  },
+	  EDIT_NOTE: function EDIT_NOTE(state, text) {
+	    state.activeNote.text = text;
+	  },
+	  DELETE_NOTE: function DELETE_NOTE(state) {
+	    state.notes.$remove(state.activeNote);
+	    state.activeNote = state.notes[0];
+	  },
+	  TOGGLE_FAVORITE: function TOGGLE_FAVORITE(state) {
+	    state.activeNote.favorite = !state.activeNote.favorite;
+	  },
+	  SET_ACTIVE_NOTE: function SET_ACTIVE_NOTE(state, note) {
+	    state.activeNote = note;
+	  }
+	};
+
+	exports.default = new _vuex2.default.Store({
+	  state: state,
+	  mutations: mutations
+	});
 
 /***/ }
 /******/ ]);
