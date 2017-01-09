@@ -6,6 +6,7 @@ import a from './a.vue'
 import b from './b.vue'
 import c from './c.vue'
 import VueRouter from 'vue-router'
+import store from './store.js'
 
 Vue.use(VueRouter);
 /*
@@ -76,6 +77,7 @@ new Vue({
 */
 new Vue({
     router,
+	store,
     render: h => h(a)
 }).$mount('#app-5')
 
