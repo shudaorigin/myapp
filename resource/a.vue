@@ -1,27 +1,35 @@
+<style scoped>
+.container {
+  border: 1px solid #00f;
+}
+.red {
+  color: #f00;
+}
+</style>
+
 <template>
-  <span>111111{{ btn }}
-  <input  ref='input' v-model:btn='btn'  v-focus v-on:input='increment($event.target.value)'/></span>
+  <div class="container">
+    <h2 class="red">{{msg}}</h2>
+	<h1>Hello App!</h1>
+	  <p>
+		<!-- 使用 router-link 组件来导航. -->
+		<!-- 通过传入 `to` 属性指定链接. -->
+		<!-- <router-link> 默认会被渲染成一个 `<a>` 标签 -->
+		<router-link to="/foo">Go to Foo</router-link>
+		<router-link to="/bar">Go to Bar</router-link>
+	  </p>
+	  <!-- 路由出口 -->
+	  <!-- 路由匹配到的组件将渲染在这里 -->
+	  <router-view></router-view>
+  </div>
 </template>
+
 <script>
-var child = {
-  		template:'#mytemplate',
-		props:{'btn':{
-					  type: String,
-					  default: 100
-					}},
-		data:function () {
-		  return {
-		          childMessage: 'child oK'
-		         };
-		},
-		methods: { 
-			increment: function (val) {
-			   
-			   this.$emit('input', val)
-			},		
-            findParent: function (value) { 
-				
-            }  
-        } 
+export default {
+  data () {
+    return {
+      msg: 'Hello from Component A!'
+    }
+  }
 }
 </script>

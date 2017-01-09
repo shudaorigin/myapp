@@ -52,6 +52,7 @@
 	var Vue = __webpack_require__(1)
 	var App = __webpack_require__(2)
 
+
 /***/ },
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
@@ -6193,14 +6194,77 @@
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
+	
+	var App = __webpack_require__(3)
+
+	Vue.directive('focus', {
+		  // ������Ԫ�ز��뵽 DOM �С�
+		  inserted: function (el) {
+			// �۽�Ԫ��
+			el.focus();
+		  }
+	});
+
+	var app5 = new Vue({
+		  el: '#app-5',
+		  data: {
+			message: 'Hello Vue.js!',
+	        items:[ ]		
+		  },
+	      components: {
+			// <my-component> ��ֻ�ڸ�ģ������		
+			'my-tag': Child
+		  },
+		  created: function () {
+			  /*
+			    var vm = this			
+				//vm.items = 'Thinking...';		  
+			    this.$http.jsonp('http://211.149.193.19:8080/api/customers',{ dataType:"jsonp"}).then((response) => {
+					// success callback
+					vm.items=(response.data);
+					console.info("loadAjax");
+				  }, (response) => {
+					return [];
+				}); 
+			  */			
+		  },
+		  watch: {
+			// ���� question �����ı䣬���������ͻ�����
+			 items:function(){
+			   // console.info(999);
+			 }
+		  },
+		  compiled: function(){
+	        setTimeout(function(){
+			  this.loaded = true;
+			}.bind(this), 1000);
+	      },
+		  mounted : function() {
+			console.info("mounted ");
+		  },
+		  methods: {
+		    ajaxData:function () {
+				
+			},
+			reverseMessage: function () {
+				//for(var k=0 ;k<1000;k++){
+				  this.items.push({"customerId": k});
+				//}			
+			  //this.message = this.message.split('').reverse().join('')		  
+			}
+		  }
+		})
+
+
+/***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
 	var __vue_exports__, __vue_options__
 	var __vue_styles__ = {}
 
 	/* script */
-	__vue_exports__ = __webpack_require__(3)
-
-	/* template */
-	var __vue_template__ = __webpack_require__(4)
+	__vue_exports__ = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"!!!vue-loader/lib/selector?type=script&index=0!./a.vue\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()))
 	__vue_options__ = __vue_exports__ = __vue_exports__ || {}
 	if (
 	  typeof __vue_exports__.default === "object" ||
@@ -6213,8 +6277,6 @@
 	  __vue_options__ = __vue_options__.options
 	}
 	__vue_options__.__file = "D:\\nodeworkspace\\myapp\\resource\\a.vue"
-	__vue_options__.render = __vue_template__.render
-	__vue_options__.staticRenderFns = __vue_template__.staticRenderFns
 
 	/* hot reload */
 	if (false) {(function () {
@@ -6232,77 +6294,6 @@
 
 	module.exports = __vue_exports__
 
-
-/***/ },
-/* 3 */
-/***/ function(module, exports) {
-
-	//
-	//
-	//
-	//
-
-	var child = {
-	  		template:'#mytemplate',
-			props:{'btn':{
-						  type: String,
-						  default: 100
-						}},
-			data:function () {
-			  return {
-			          childMessage: 'child oK'
-			         };
-			},
-			methods: { 
-				increment: function (val) {
-				   
-				   this.$emit('input', val)
-				},		
-	            findParent: function (value) { 
-					
-	            }  
-	        } 
-	}
-
-
-/***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
-	  return _c('span', [_vm._v("111111" + _vm._s(_vm.btn) + "\n"), _c('input', {
-	    directives: [{
-	      name: "model",
-	      rawName: "v-model:btn",
-	      value: (_vm.btn),
-	      expression: "btn",
-	      arg: "btn"
-	    }, {
-	      name: "focus",
-	      rawName: "v-focus",
-	      arg: "btn"
-	    }],
-	    ref: "input",
-	    domProps: {
-	      "value": _vm._s(_vm.btn)
-	    },
-	    on: {
-	      "input": [function($event) {
-	        if ($event.target.composing) { return; }
-	        _vm.btn = $event.target.value
-	      }, function($event) {
-	        _vm.increment($event.target.value)
-	      }]
-	    }
-	  })])
-	},staticRenderFns: []}
-	module.exports.render._withStripped = true
-	if (false) {
-	  module.hot.accept()
-	  if (module.hot.data) {
-	     require("vue-hot-reload-api").rerender("data-v-5ed3dd4b", module.exports)
-	  }
-	}
 
 /***/ }
 /******/ ]);
