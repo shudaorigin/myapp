@@ -55,7 +55,6 @@ module.exports = {
     }),
     // optimize module ids by occurence count
     new webpack.optimize.OccurenceOrderPlugin()
-	*/
-    
+*/
   ]
 }
