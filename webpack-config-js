@@ -1,19 +1,27 @@
 var webpack = require('webpack')
-var path = require('path')
 module.exports = {
   entry: './resource/entry.js',
   output: {
-    path: path.resolve(__dirname, './../public/'),
-    publicPath: '/public/',
-    filename: 'appMain.js'
-  }, 
-
-  module: {
+    path: __dirname,
+    filename: './resource/bundle.js'
+  },
+ module: {
     loaders: [
       //转化ES6语法
+      {
+        test: /\.js$/,
+        loader: 'babel',
+        exclude: /node_modules/,
+        query: {
+                    presets: ['es2015']
+                }
+      },
       { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader'},
       //解析.vue文件
-      { test:/\.vue$/, loader:'vue'},
+      {
+        test:/\.vue$/,
+        loader:'vue'
+      },
       {test: /\.css$/, loader: 'style!css'}
     ]
   },
@@ -32,9 +40,7 @@ module.exports = {
       'process.env': {
         NODE_ENV: '"production"'
       }
-    }),
-	new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    })
 	/*,
     // minify with dead-code elimination
     new webpack.optimize.UglifyJsPlugin({
