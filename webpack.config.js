@@ -3,9 +3,9 @@ var path = require('path')
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './entry.js',
+  entry: './resource/entry.js',
   output: {
-    path: path.resolve(__dirname, './../public/'),
+    path: path.resolve(__dirname, './public/'),
     publicPath: '/public/',
     filename: 'appMain.js'
   }, 

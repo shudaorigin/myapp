@@ -7,8 +7,12 @@ import b from './b.vue'
 import c from './c.vue'
 import VueRouter from 'vue-router'
 import store from './store.js'
+import Validator from 'vue-validator'
+Vue.use(Validator)
 
 Vue.use(VueRouter);
+
+
 /*
 const router = new Router({
         routes: [{

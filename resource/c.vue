@@ -9,7 +9,7 @@
 
 <template>
   <div class="container">
-    <h2 class="red">12134234234234{{msg}}</h2>
+    <h2 class="red">opopop9999{{msg}}</h2>
 	
   </div>
 </template>

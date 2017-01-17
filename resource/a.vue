@@ -12,10 +12,20 @@
     <h2 class="red">{{$store.state.platform}}</h2>
 	<h2 class="red">{{storeData}}</h2>
 	
-	<input v-model="$store.state.platform">
-	<button @click="addTodo">Reverse Message</button>
+	  <validity :validators="{ required: true,  minlength:2,  maxlength:3}">
+		<input type="text" @input="handleValidate" @focusout="handleValidate">
+      </validity>
 	  
-	<h1>Hello App! 4578589 /h1>
+	  <div class="errors">
+		<p class="required" v-if="result.required">required username!!</p>
+		<p class="minlength" v-if="result.minlength">too short username!!</p>
+		<p class="maxlength" v-if="result.maxlength">too maxlength username!!</p>		
+	  </div>
+	
+	<input v-model="$store.state.platform">
+	<button @click="addTodo">77888Reverse Message</button>
+	  
+	<h1>Hello App!{{msg}}23442 /h1>
 	  <p>
 		<!-- 使用 router-link 组件来导航. -->
 		<!-- 通过传入 `to` 属性指定链接. -->
@@ -35,6 +45,11 @@ import { toggleAlert } from './actions.js'
 export default {
   data () {
     return {
+	  rules: {
+		  minlength: 3,
+		  maxlength: 16
+	  },
+	  result: {},
       msg: 'Hello from Component A!'
     }
   }, 
@@ -66,7 +81,17 @@ export default {
   methods:{
     addTodo: function () {
 	   this.msg =this.$store.getters.getApp;
-	}
+	},
+	handleValidate: function (e) {
+            var self = this
+            // get validity instance
+            var $validity = e.target.$validity 
+            // run validate method !!
+            $validity.validate(function () {
+              // keep validation result from result property of validity instance
+              self.result = $validity.result
+            })
+    }
   }
   
 }

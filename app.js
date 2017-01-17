@@ -5,12 +5,33 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var webpack = require("webpack");
+var webpackConfig =require('./webpack.config.dev.js')
+  
 var log4js = require('log4js');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+
+var compiler = webpack(webpackConfig)
+
+var devMiddleware = require('webpack-dev-middleware')(compiler, {
+  publicPath: webpackConfig.output.publicPath,
+  quiet: true
+})
+
+var hotMiddleware = require('webpack-hot-middleware')(compiler, {
+  log: () => {}
+})
+// force page reload when html-webpack-plugin template changes
+compiler.plugin('compilation', function (compilation) {
+  compilation.plugin('html-webpack-plugin-after-emit', function (data, cb) {
+    hotMiddleware.publish({ action: 'reload' })
+    cb()
+  })
+})
 
 log4js.configure({
     appenders: [
