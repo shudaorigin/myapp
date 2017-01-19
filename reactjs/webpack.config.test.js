@@ -2,7 +2,7 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
-  entry: './unit.js',
+  entry: './index.js',
   output: {
     path: path.resolve(__dirname, './../public/'),
     //publicPath: './../public/',
@@ -17,8 +17,7 @@ module.exports = {
 	  {
         test: /\.jsx?$/,
         loader: "babel",
-		exclude: /(node_modules)/
-		//exclude: /(node_modules|bower_components)/
+		exclude: /(node_modules|bower_components)/,
 		/*
 		exclude :[
 				  /node_modules\/babel-/m,
@@ -33,11 +32,6 @@ module.exports = {
       { test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader'},
       { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=8192'}	
     ]
-  },
-  externals: {
-	  'react/addons': true,
-	  'react/lib/ExecutionEnvironment': true,
-	  'react/lib/ReactContext': true
   },
   plugins: [
     new webpack.BannerPlugin('This file is created by shubs'),
