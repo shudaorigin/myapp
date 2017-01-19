@@ -1,0 +1,51 @@
+var webpack = require('webpack')
+var path = require('path')
+
+var config = {
+  entry: './reactMain.js',
+  output: {
+    path: path.resolve(__dirname, './../public/'),
+    publicPath: '/public/',
+    filename: 'reactMini.js'
+  },
+  //devtool: 'source-map',
+  module: {
+    loaders: [{
+      test: /\.jsx?$/, // 用正则来匹配文件路径，这段意思是匹配 js 或者 jsx
+      loader: 'babel-loader' // 加载模块 "babel" 是 "babel-loader" 的缩写,
+    }
+	/*
+	, {
+            test: /\.jsx$/,
+            loader: 'babel-loader!jsx-loader?harmony'
+        }
+	*/
+	]
+  } ,
+  /*
+  externals: {
+        'react': 'React',
+        'react-dom': 'ReactDOM'
+  },
+  */
+  plugins: [
+    new webpack.BannerPlugin('This file is created by shubs'),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"production"'
+      }
+    }),
+	//new webpack.HotModuleReplacementPlugin(),
+    //new webpack.NoErrorsPlugin(),
+    // minify with dead-code elimination
+	/*
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    })
+	*/
+   ]
+};
+
+module.exports = config;

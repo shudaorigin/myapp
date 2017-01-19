@@ -26,5 +26,10 @@ router.get('/vuewp', function(req, res, next) {
    //global.logger.info("This is an index page!");   
    res.render('vuewp', { title: 'vue' });
 });
+router.get('/react', function(req, res, next) {
+   //global.logger.info("This is an index page!");   
+   res.render('react', { title: 'vue' });
+});
+
 
 module.exports = router;
