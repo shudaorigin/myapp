@@ -30,7 +30,21 @@ module.exports = {
 	  { test: /\.css$/, loader: 'style-loader!css-loader' },
       { test: /\.scss$/, loader: 'style!css!sass?sourceMap'},
       { test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader'},
-      { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192'}	
+      { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=8192'}	
     ]
-  }
+  },
+  plugins: [
+    new webpack.BannerPlugin('This file is created by shubs'),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"production"'
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    })
+	
+   ]
 };
