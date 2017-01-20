@@ -3,8 +3,25 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "test": "mocha",
+    "test": "jest",
     "start": "webpack-dev-server --inline --hot --config ./webpack.config.dev.js"
+  },
+  "jest": {
+    "collectCoverage": true,
+    "collectCoverageOnlyFrom": {
+      "reactjs/index.js": true
+    },
+    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+    "testFileExtensions": [
+      "es6",
+      "js"
+    ],
+    "moduleFileExtensions": [
+      "js"
+    ],
+    "unmockedModulePathPatterns": [
+      "react"
+    ]
   },
   "dependencies": {
     "babel-loader": "^6.2.4",
@@ -29,6 +46,13 @@
     "webpack-dev-server": "^1.14.1"
   },
   "devDependencies": {
+    "cheerio": "^0.22.0",
+    "enzyme": "^2.7.0",
+    "fs": "0.0.1-security",
+    "jasmine-core": "^2.5.2",
+    "json-loader": "^0.5.4",
+    "less": "^2.7.2",
+    "less-loader": "^2.2.3",
     "react-bootstrap": "^0.30.7"
   }
 }

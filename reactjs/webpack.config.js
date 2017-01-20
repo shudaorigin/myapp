@@ -2,7 +2,7 @@ var webpack = require('webpack');
 var path = require('path');
 
 module.exports = {
-  entry: './unit.js',
+  entry: './components/index.js',
   output: {
     path: path.resolve(__dirname, './../public/'),
     //publicPath: './../public/',
@@ -28,8 +28,10 @@ module.exports = {
 		*/
         //,include: path.join(__dirname, 'scripts')
       },
+      { test: /\.json$/, loader: 'json-loader' },   
 	  { test: /\.css$/, loader: 'style-loader!css-loader' },
       { test: /\.scss$/, loader: 'style!css!sass?sourceMap'},
+	  {	test: /\.less$/, loader: 'style!css!less'},
       { test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader'},
       { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=8192'}	
     ]
