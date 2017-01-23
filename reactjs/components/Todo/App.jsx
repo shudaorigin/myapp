@@ -1,8 +1,8 @@
 
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
-
 import { connect } from 'react-redux'
+
 import AddTodo from './AddTodo.jsx'
 import TodoList from './TodoList.jsx'
 import TodoFilter from './TodoFilter.jsx'
@@ -45,7 +45,7 @@ function filterTodos(todos, filter) {
 }
 
 function select(state) {
-	//console.log(state)
+	console.log(state)
 	return {
 		filteredTodos: filterTodos(state.todos, state.filter),
 		filter: state.filter

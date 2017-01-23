@@ -27,6 +27,45 @@ export function toggleTodo(index) {
 	}
 }
 
+
+function fetchSecretSauce() {
+  return fetch('http://127.0.0.1:3000/json/');
+}
+
+function makeASandwich(forPerson, secretSauce) {
+  return {
+    type: 'TODO_AJAX',
+    forPerson,
+    secretSauce
+  };
+}
+
+function apologize(fromPerson, toPerson, error) {
+  return {
+    type: 'APOLOGIZE',
+    fromPerson,
+    toPerson,
+    error
+  };
+}
+
+export function  makeASandwichWithSecretSauce(forPerson) {
+
+  // Invert control!
+  // Return a function that accepts `dispatch` so we can dispatch later.
+  // Thunk middleware knows how to turn thunk async actions into actions.
+
+  return function (dispatch) {
+    return fetchSecretSauce().then(
+      sauce => dispatch(makeASandwich(forPerson, sauce)),
+      error => dispatch(apologize('The Sandwich Shop', forPerson, error))
+    );
+  };
+}
+
+
+
+
 export function setFilter(filter) {
 	return {
 		type: SET_FILTER,

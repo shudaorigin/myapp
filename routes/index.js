@@ -3,7 +3,7 @@ var router = express.Router();
 var selffun=require("../service/model");
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/json', function(req, res, next) {
    //global.logger.info("This is an index page!");   
   selffun.fun(function(rows){	  
 	  // res.set('Content-Type', 'text/json');

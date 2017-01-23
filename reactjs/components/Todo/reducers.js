@@ -1,11 +1,12 @@
 
 import { combineReducers } from 'redux'
 
-import { ADD_TODO, TOGGLE_TODO, SET_FILTER, Filters } from './actions.js'
+import { ADD_TODO, TOGGLE_TODO, SET_FILTER, Filters,TODOS_AJAX } from './actions.js'
 
-const { SHOW_ALL } = Filters
+const { SHOW_COMPLETED } = Filters
 
-function todos(state = [], action) {
+function todos(state = [{text:123,complete:true}], action) {
+	
     //console.info("--------------"+action);
 	switch(action.type){
 		case ADD_TODO:
@@ -30,7 +31,7 @@ function todos(state = [], action) {
 	}
 }
 
-function filter(state = SHOW_ALL, action) {
+function filter(state = SHOW_COMPLETED, action) {
 	switch(action.type){
 		case SET_FILTER:
 			return action.filter
