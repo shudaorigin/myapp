@@ -14,8 +14,7 @@ function logger({ getState }) {
   console.info('logger-Middle-Plugin');
 	
   return (next) => (action) => {
-	  
-	  console.info(next);
+	
     console.log('will dispatch', action)
 
     // 调用 middleware 链中下一个 middleware 的 dispatch。

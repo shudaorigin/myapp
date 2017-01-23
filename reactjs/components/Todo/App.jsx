@@ -7,10 +7,14 @@ import AddTodo from './AddTodo.jsx'
 import TodoList from './TodoList.jsx'
 import TodoFilter from './TodoFilter.jsx'
 
-import { addTodo, toggleTodo, setFilter, Filters } from './actions.js'
+import { addTodo, toggleTodo, setFilter, Filters , getThenShow} from './actions.js'
 
 class App extends Component {
 
+	ajaxClick() {
+		ajaxFun();
+	}
+	
 	render() {
 		/*
 		// ES5
@@ -24,6 +28,7 @@ class App extends Component {
        	const { dispatch, filteredTodos, filter } = this.props
 		return (
 			<div>
+			    <button onClick={()=>dispatch(getThenShow)}>Add</button>
 				<AddTodo onAddClick={(text) => dispatch(addTodo(text))} />
 				<TodoList todos={filteredTodos} onToggleClick={(index) => dispatch(toggleTodo(index))} />
 				<TodoFilter filter={filter} onFilterChange={(filter) => dispatch(setFilter(filter))} />
@@ -45,7 +50,7 @@ function filterTodos(todos, filter) {
 }
 
 function select(state) {
-	console.log(state)
+	
 	return {
 		filteredTodos: filterTodos(state.todos, state.filter),
 		filter: state.filter
