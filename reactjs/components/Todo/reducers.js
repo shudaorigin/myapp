@@ -1,7 +1,7 @@
 
 import { combineReducers } from 'redux'
 
-import { ADD_TODO, TOGGLE_TODO, SET_FILTER, Filters,TODOS_AJAX } from './actions.js'
+import { ADD_TODO, TOGGLE_TODO, SET_FILTER, Filters,TODOS_AJAX,FETCH_DATA_FAIL,SHOW_MESSAGE_FOR_ME } from './actions.js'
 
 const { SHOW_COMPLETED } = Filters
 
@@ -26,6 +26,30 @@ function todos(state = [{text:123,complete:true}], action) {
 				}
 				return todo
 			})
+		case SHOW_MESSAGE_FOR_ME:
+		
+				   if (state.length>1) return state;
+				   console.info(state.length);
+				   
+		           var data=[];				 
+		           action.text.forEach(function(v, i, a) {
+						data.push(
+						{
+							text: v.USERNAME,
+						    completed: false
+						}
+						)
+					});
+					return data;
+		/*
+		   return [
+				...state,
+				{
+					text: action.text,
+					completed: false
+				}
+			]
+		*/			
 		default:
 			return state
 	}

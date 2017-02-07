@@ -8,6 +8,7 @@ import TodoList from './TodoList.jsx'
 import TodoFilter from './TodoFilter.jsx'
 
 import { addTodo, toggleTodo, setFilter, Filters , getThenShow} from './actions.js'
+var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 
 class App extends Component {
 
@@ -27,12 +28,14 @@ class App extends Component {
 
        	const { dispatch, filteredTodos, filter } = this.props
 		return (
+		 <ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={5000} transitionLeaveTimeout={3000}>
 			<div>
 			    <button onClick={()=>dispatch(getThenShow)}>Add</button>
 				<AddTodo onAddClick={(text) => dispatch(addTodo(text))} />
 				<TodoList todos={filteredTodos} onToggleClick={(index) => dispatch(toggleTodo(index))} />
 				<TodoFilter filter={filter} onFilterChange={(filter) => dispatch(setFilter(filter))} />
-			</div>	 
+			</div>	
+		  </ReactCSSTransitionGroup>			
 		)
 	}
 
