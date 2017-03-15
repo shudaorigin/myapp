@@ -10,7 +10,7 @@ export default class TodoFilter extends Component {
 			)
 		}
 		return (
-			<a href="#" onClick={() => {this.props.onFilterChange(filter)}}>{name}</a>
+			<div href="#" onClick={() => {this.props.onFilterChange(filter)}}>{name}</div>
 		)
 	}
 

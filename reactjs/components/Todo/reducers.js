@@ -5,8 +5,8 @@ import { ADD_TODO, TOGGLE_TODO, SET_FILTER, Filters,TODOS_AJAX,FETCH_DATA_FAIL,S
 
 const { SHOW_COMPLETED } = Filters
 
-function todos(state = [{text:123,complete:true}], action) {
-	
+function todos(state = [], action) {
+
     //console.info("--------------"+action);
 	switch(action.type){
 		case ADD_TODO:
@@ -27,11 +27,11 @@ function todos(state = [{text:123,complete:true}], action) {
 				return todo
 			})
 		case SHOW_MESSAGE_FOR_ME:
-		
+
 				   if (state.length>1) return state;
 				   console.info(state.length);
-				   
-		           var data=[];				 
+
+		           var data=[];
 		           action.text.forEach(function(v, i, a) {
 						data.push(
 						{
@@ -49,7 +49,7 @@ function todos(state = [{text:123,complete:true}], action) {
 					completed: false
 				}
 			]
-		*/			
+		*/
 		default:
 			return state
 	}

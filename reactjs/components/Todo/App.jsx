@@ -15,18 +15,18 @@ class App extends Component {
 	ajaxClick() {
 		ajaxFun();
 	}
-	
+
 	render() {
 		/*
 		// ES5
-		var user = this.props.user,  
+		var user = this.props.user,
 			post = this.props.post;
 		Becomes...
 		// ES6
-		const { user, post } = this.props;  
+		const { user, post } = this.props;
 		*/
 
-       	const { dispatch, filteredTodos, filter } = this.props
+    const { dispatch, filteredTodos, filter } = this.props
 		return (
 		 <ReactCSSTransitionGroup transitionName="example" transitionEnterTimeout={5000} transitionLeaveTimeout={3000}>
 			<div>
@@ -34,8 +34,8 @@ class App extends Component {
 				<AddTodo onAddClick={(text) => dispatch(addTodo(text))} />
 				<TodoList todos={filteredTodos} onToggleClick={(index) => dispatch(toggleTodo(index))} />
 				<TodoFilter filter={filter} onFilterChange={(filter) => dispatch(setFilter(filter))} />
-			</div>	
-		  </ReactCSSTransitionGroup>			
+			</div>
+		  </ReactCSSTransitionGroup>
 		)
 	}
 
@@ -43,17 +43,17 @@ class App extends Component {
 
 function filterTodos(todos, filter) {
 	switch(filter) {
-		case Filters.SHOW_ALL: 
+		case Filters.SHOW_ALL:
 			return todos;
-		case Filters.SHOW_COMPLETED: 
+		case Filters.SHOW_COMPLETED:
 			return todos.filter(todo => todo.completed)
-		case Filters.SHOW_ACTIVE: 
+		case Filters.SHOW_ACTIVE:
 			return todos.filter(todo => !todo.completed)
 	}
 }
 
 function select(state) {
-	
+
 	return {
 		filteredTodos: filterTodos(state.todos, state.filter),
 		filter: state.filter
@@ -61,4 +61,3 @@ function select(state) {
 }
 
 export default connect(select)(App)
-

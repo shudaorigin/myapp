@@ -11,7 +11,7 @@ var conn = mysql.createConnection({
 
 var fun= function  model(callback){
 	//global.logger.info("---------------index");	
-	
+	/*
 	callback([]);
 		
 	var count1 = 0;
@@ -27,11 +27,11 @@ var fun= function  model(callback){
 			log('1.1 err: ', err); // -> undefined
 		}
 	);
-	
+	*/
 
-	/*
+
 	conn.connect();
-	conn.query('SELECT * from estar_user', function(err, rows, fields) {
+	conn.query('SELECT * from estar_user limit 3', function(err, rows, fields) {
 		if (err) throw err;
 		if (callback)
 		{
@@ -43,7 +43,7 @@ var fun= function  model(callback){
 		
 	});
 	conn.end();
-	*/
+	
 }
 
 module.exports={

@@ -9,11 +9,21 @@
     <script src="/components/jasmine-core/lib/jasmine-core/jasmine-html.js"></script>
     <script src="/components/jasmine-core/lib/jasmine-core/boot.js"></script>	
 -->
+	<script src="/components/react/react.min.js"></script>	
+    <script src="/components/react/react-dom.min.js"></script>	
+	<script src="/browser.min.js"></script>	
+ 
 </head>
 <body>
 
 
    <div id="todo" style="width: 780px; margin-left: auto; margin-right: auto;"></div>
-    <script src="/ractMain.js"></script>
+   <script type="text/babel">
+      ReactDOM.render(
+        <h1>Hello, world!</h1>,
+        document.getElementById('todo')
+      );
+    </script>
+   
 </body>
 </html>
