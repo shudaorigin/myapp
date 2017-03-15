@@ -12,17 +12,117 @@
 	<script src="/components/react/react.min.js"></script>	
     <script src="/components/react/react-dom.min.js"></script>	
 	<script src="/browser.min.js"></script>	
- 
+    <script src="/components/zepto-full/zepto.min.js"></script>	
+	
 </head>
 <body>
 
 
-   <div id="todo" style="width: 780px; margin-left: auto; margin-right: auto;"></div>
+   <div id="example" style="width: 780px; margin-left: auto; margin-right: auto;"></div>
    <script type="text/babel">
-      ReactDOM.render(
-        <h1>Hello, world!</h1>,
-        document.getElementById('todo')
-      );
+        var HelloMessage = React.createClass({
+		   propTypes: {
+			  name: React.PropTypes.string.isRequired,
+		  },
+		  getDefaultProps : function () {
+			return {
+			  name : 'Hello World'
+			};
+		  },
+		  render: function() {
+			return <h1>Hello {this.props.name}</h1>;
+		  }
+		});
+		
+		var UserGist = React.createClass({
+		  getInitialState: function() {
+			return {
+			  username: '',
+			  lastGistUrl: ''
+			};
+		  },
+
+		  componentDidMount: function() {
+			$.get(this.props.source, function(result) {
+			  var lastGist = result[0];
+			  if (this.isMounted()) {			    
+				this.setState({
+				  username: lastGist.owner.login,
+				  lastGistUrl: lastGist.html_url
+				});
+			  }
+			}.bind(this));
+		  },
+		    
+		  render: function() {
+			return (
+			  <div>
+				{this.state.username}'s last gist is
+				<a href={this.state.lastGistUrl}>here</a>.
+			  </div>
+			);
+		  }
+		});
+		
+		var NotesList = React.createClass({
+		  getInitialState: function() {
+			return {liked: false};
+		  },
+   		  handleClick: function() {
+			this.refs.myTextInput.focus();
+			this.setState({liked: !this.state.liked});
+		  },
+		  componentWillUpdate:function(nextProps, nextState){
+		 		return true;
+		  },
+		  shouldComponentUpdate: function(nextProps, nextState){
+			//return this.state.checked === nextState.checked;
+			return false ;
+		  },
+		  	  componentWillMount:function() {
+				  console.log('Component WILL MOUNT!')
+			  },
+			 
+			  componentWillReceiveProps:function(newProps) {
+					console.log('Component WILL RECEIVE PROPS!')
+			  },
+			  shouldComponentUpdate:function(newProps, newState) {
+					return true;
+			  },
+			  componentWillUpdate:function(nextProps, nextState) {
+					console.log('Component WILL UPDATE!');
+			  },
+			  componentDidUpdate:function(prevProps, prevState) {
+					console.log('Component DID UPDATE!')
+			  },
+			  componentWillUnmount:function() {
+					 console.log('Component WILL UNMOUNT!')
+			  },
+		  render: function() {
+		    console.info('render');
+			return (
+			  <ol>
+			  <HelloMessage />
+			    <input type="text" ref="myTextInput" />
+				<input type="button" value="Focus the text input" onClick={this.handleClick} />
+				<UserGist source="https://api.github.com/users/octocat/gists" />
+			    {
+				React.Children.map(this.props.children, function (child) {
+				  return <li>{child}</li>;
+				})
+			  }
+			  </ol>
+			);
+		  }
+		});
+
+		ReactDOM.render(
+		   <NotesList>
+			<span>hello</span>
+			<span>world</span>
+		  </NotesList>,
+		  document.getElementById('example')
+		);
     </script>
    
 </body>
